@@ -1,3 +1,11 @@
+# LL-TrueTime (Last Lock Fork)
+
+NTP client for Swift that returns a trusted "now" unaffected by manual device clock changes. This is Last Lock’s maintained fork of TrueTime.swift.
+
+## Why this fork?
+- [Short reason: e.g., stable defaults, internal NTP servers, audited behavior, no external dependency drift.]
+- This fork hosts the package through Github Packages allowing Last Lock mobile SDK binary to be built and hosted via Github Packages as well
+
 # TrueTime for Swift [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Travis CI](https://travis-ci.org/instacart/TrueTime.swift.svg?branch=master)](https://travis-ci.org/instacart/TrueTime.swift)
 
 ![TrueTime](truetime.png "TrueTime for Swift")
