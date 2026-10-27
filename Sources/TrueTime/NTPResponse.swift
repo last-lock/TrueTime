@@ -48,7 +48,7 @@ func bestTime(fromResponses times: [[FrozenNetworkTime]]) -> FrozenNetworkTime? 
 private extension NTPResponse {
     var isValidResponse: Bool {
         return packet.stratum > 0 && packet.stratum < 16 &&
-               packet.root_delay.durationInMilliseconds < maxRootDispersion &&
+               packet.root_delay.durationInMilliseconds < maxRootDelay &&
                packet.root_dispersion.durationInMilliseconds < maxRootDispersion &&
                packet.client_mode == ntpModeServer &&
                packet.leap_indicator != leapIndicatorUnknown &&
@@ -63,7 +63,11 @@ private extension NTPResponse {
     }
 }
 
-private let maxRootDispersion: Int64 = 100
+// Corporate networks often intercept UDP/123 and answer from an internal server whose root
+// delay is above the upstream default of 100ms. The time error is bounded by
+// root_delay / 2 + root_dispersion, so 1s caps keep it under 1.5s.
+private let maxRootDelay: Int64 = 1000
+private let maxRootDispersion: Int64 = 1000
 private let maxDelayDelta: Int64 = 100
 private let ntpModeServer: UInt8 = 4
 private let leapIndicatorUnknown: UInt8 = 3
